@@ -1,0 +1,93 @@
+<!-- Top content -->
+<div class="top-content">
+    <div class="inner-bg">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-8 col-sm-offset-2 text">
+                    <h1><strong>Welcome to PNHS SSG Online Voting System</strong></h1>
+                    <div class="description">
+                        <p>
+                            Please cooperate and follow instructions as you are thoroughly guided for a fast and honest election.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
+            <form data-ng-submit="registration.register()">
+                <div class="row">
+                    <div class="col-sm-1">
+                        &nbsp;
+                    </div>
+                    <div class="col-sm-10">
+                        <div class="form-box">
+                            <div class="form-top">
+                                <div class="form-top-left">
+                                    <h3>Sign up now</h3>
+                                    <p>Fill in the form below to get instant access:</p>
+                                </div>
+                                <div class="form-top-right">
+                                    <i class="fa fa-pencil"></i>
+                                </div>
+                            </div>
+                            <div class="form-bottom">
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <input type="text" class="form-control" maxLength="12" minLength="12" placeholder="LRN" data-ng-model="registration.credential.lrn" data-ng-keypress="registration.filterValue($event)"/>
+                                    </div>
+                                </div>
+                                <br/>
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <input type="text" class="form-control" data-ng-model="registration.credential.firstname" placeholder="Firstname"/>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <input type="text" class="form-control" data-ng-model="registration.credential.lastname" placeholder="Lastname"/>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <input type="text" class="form-control" data-ng-model="registration.credential.middlename" placeholder="Middilename"/>
+                                    </div>
+                                </div>
+                                <br/>
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <label>Gender</label>
+                                        <select class="form-control" data-ng-model="registration.credential.gender">
+                                            <option value="Male" selected>Male</option>
+                                            <option value="Female">Female</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <label>Birthdate</label>
+                                        <input type="date" data-ng-model="registration.credential.birthdate" class="form-control"/>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <label>Age</label>&emsp;<br/><span class="badge" data-ng-bind="registration.credential.age"></span>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <label>Grade Level</label>
+                                        <select class="form-control" data-ng-model="registration.credential.yearlevel">
+                                            <option selected value="7">7</option>
+                                            <option value="8">8</option>
+                                            <option value="9">9</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <label>Section</label>
+                                        <select class="form-control" data-ng-model="registration.credential.section">
+                                            <option data-ng-repeat="section in registration.sectionList" value="{{section}}">{{section}}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <br/>
+                                <button type="submit" class="btn btn-primary btn-block">Register!</button>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

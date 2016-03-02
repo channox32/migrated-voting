@@ -1,0 +1,159 @@
+<div id="wrapper">
+    <!-- Navigation -->
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#/admin">Administrator Dashboard</a>
+        </div>
+        <!-- Top Menu Items -->
+        <ul class="nav navbar-right top-nav">
+            <li class="dropdown">
+                <li class="dropdown">
+                    <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" data-ng-bind="dashboard.userInfo.firstname + ' ' + dashboard.userInfo.lastname"><i class="fa fa-user"></i><b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="javascript:void(0)" data-ng-click="dashboard.logout()"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
+            <div class="collapse navbar-collapse navbar-ex1-collapse">
+                <ul class="nav navbar-nav side-nav">
+                    <li data-ng-class="{active : dashboard.titleIndex==0}">
+                        <a href="javascript:void(0)" data-ng-click="dashboard.titleIndex=0"><i class="fa fa-user"></i> Student Management</a>
+                    </li>
+                    <li data-ng-class="{active : dashboard.titleIndex==1}">
+                        <a href="javascript:void(0)" data-ng-click="dashboard.titleIndex=1"><i class="fa fa-group"></i> Candidate Management </a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </nav>
+        <div id="page-wrapper">
+            <div class="container-fluid">
+                <!--  Heading -->
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="alert alert-info">
+                            <h1>{{dashboard.subTitle}} Panel</h1>
+                        </div>
+                    </div>
+                </div>
+                <!-- Student  Panel -->
+                <div data-ng-if="dashboard.titleIndex==0">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <table class="table table-responsive">
+                                <th align="center">LRN #</th>
+                                <th align="center">Name</th>
+                                <th align="center">Year|Grade Level</th>
+                                <th align="center">Section</th>
+                                <tr data-ng-repeat="student in dashboard.studentList">
+                                    <td data-ng-bind="student.lrn"></td>
+                                    <td data-ng-bind="student.firstname + ' ' + student.lastname"></td>
+                                    <td data-ng-bind="student.yearlevel"></td>
+                                    <td data-ng-bind="student.section"></td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <!-- Candidate -->
+                <div data-ng-if="dashboard.titleIndex==1">
+                    <div class="row">
+                        <div class="col-md-2">
+                            <button type="submit" class="btn btn-success btn-block" data-toggle="modal" data-target="#addCandidate"><i class="fa fa-plus"></i>&nbsp;Add Candidate</button>
+                        </div>
+                        <div class="col-md-4">
+                            <select class="form-control" data-ng-model="dashboard.filteredCandidate">
+                                <option data-ng-repeat="position in dashboard.positions" value="{{$index}}">{{position}}</option>
+                                <option value="9" selected>Show All</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="modal fade" id="addCandidate" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h3>Add New Candidate</h3>
+                                </div>
+                                <div class="modal-body">
+                                    <form>
+                                        <div class="row">
+                                            <div class="col-md-2">
+                                                <label>Fullname</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <input type="text" required data-ng-model="dashboard.candidate.fullname" style="border:3px solid #3597D6" class="form-control" placeholder="Fullname"/>
+                                            </div>
+                                        </div>
+                                        <br/>
+                                        <div class="row">
+                                            <div class="col-md-2">
+                                                <label>Position</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <select class="form-control" required title="Choose an option" data-ng-model="dashboard.candidate.position">
+                                                    <option selected value="0">President</option>
+                                                    <option value="1">Vice President</option>
+                                                    <option value="2">Secretary</option>
+                                                    <option value="3">Treasurer</option>
+                                                    <option value="4">Auditor</option>
+                                                    <option value="5">PIO</option>
+                                                    <option value="6">4<sup>th<sup> year Representative</option>
+                                                    <option value="7">3<sup>rd<sup> year Representative</option>
+                                                    <option value="8">2<sup>nd<sup> year Representative</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <br/>
+                                        <div class="row">
+                                            <div class="col-md-2">
+                                                <label>Party</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                Create New&nbsp;<input type="radio" value="new" name="partyOption" data-ng-model="dashboard.option"/>
+                                                Choose from Option&nbsp;<input type="radio" value="option" name="partyOption" data-ng-model="dashboard.option"/>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <input type="text" class="form-control" required data-ng-show="dashboard.option=='new'"data-ng-model="dashboard.candidate.partyList" style="border:1px solid #3597D6"/>
+                                                <select class="form-control" data-ng-show="dashboard.option=='option'" data-ng-model="dashboard.candidate.partyList" required>
+                                                    <option selected data-ng-repeat="party in dashboard.partyList" value="{{party}}">{{party}}</option>
+                                                </select>
+                                                <input type="text" data-ng-show="false" style="border:2px solid red" class="form-control" placeholder="Add New Party"/>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                    <button type="submit"  data-ng-click="dashboard.addCandidate()" data-dismiss="modal" class="btn btn-primary">Add</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br/>
+                    <div class="row">
+                        <div class="col-sm-6 col-md-4" data-ng-repeat="candidate in dashboard.candidateList | orderBy:position | filter: dashboard.candidateFilter">
+                            <div class="thumbnail">
+                                <i class="fa fa-user fa-4x"></i>
+                                <div class="caption">
+                                    <h3 data-ng-bind="candidate.fullname"></h3>
+                                    <label class="label label-danger">{{dashboard.positions[candidate.position]}}</label><br/>
+                                    <strong data-ng-bind="candidate.partyList"></strong>
+                                    <h3> Number of Votes <span class="badge" data-ng-bind="candidate.votes"></span></h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

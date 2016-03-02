@@ -1,0 +1,15 @@
+{
+  "name": "PNHS_Online_Voting_App",
+  "version": "0.2.1",
+  "author": "Christian Rey Flores | https://github.com/channox32/",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "body-parser": "latest",
+    "crypto": "0.0.3",
+    "express": "^4.13.4",
+    "mongoose": "^4.4.5",
+    "morgan": "latest"
+  }
+}
