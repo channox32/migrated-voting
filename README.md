@@ -1,4 +1,4 @@
-[![Build Status]](https://travis-ci.org/channox32/migrated-voting)
+[![Build Status](https://travis-ci.org/channox32/migrated-voting.svg?branch=master)](https://travis-ci.org/channox32/migrated-voting)
 # PNHS Online Voting System 
 
 An automated voting system for the students of *Paknaan National High School* for the election of Supreme Students Government (SSG).
